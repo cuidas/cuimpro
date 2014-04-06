@@ -130,7 +130,12 @@ var Base64 = {
 
 $(document).ready(function () {
     $("#submit-button").click(function (event) {
-        window.location = "./index.php?data=" + Base64.encode($("form").serialize());
         event.preventDefault();
+        if ($("#data-url").val().length == 0) {
+            $(".url").addClass("has-error");
+            $(".error-msg").text('Please enter a valid URL');
+            return;
+        }
+        window.location = "./index.php?data=" + Base64.encode($("form").serialize());
     });
 });

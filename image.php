@@ -8,7 +8,6 @@ if (!ini_get('allow_url_fopen')) {
 $imgname = ($_GET['url']);
 $im = imagecreatefrompng($imgname);
 
-
 /* See if it failed */
 if (!$im) {
     /* Create a blank image */
@@ -20,6 +19,18 @@ if (!$im) {
 
     /* Output an error message */
     imagestring($im, 1, 5, 5, 'Error loading ' . $imgname, $tc);
+} else {
+    imagettftext($im, 20, 0, 30, imagesy($im) - 30, 0, './HansKendrick-Regular.ttf', 'Shared with Cuidas\' Imageproxy');
+    imagettftext(
+        $im,
+        20,
+        90,
+        imagesx($im) - 30,
+        imagesy($im) - 30,
+        0,
+        './HansKendrick-Regular.ttf',
+        'source: ' . urldecode($_GET['url'])
+    );
 }
 
 

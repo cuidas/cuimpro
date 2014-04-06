@@ -18,7 +18,7 @@ if ($show_image) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -43,7 +43,7 @@ if ($show_image) {
             background: url('http://upload.wikimedia.org/wikipedia/commons/1/13/Facebook_like_thumb.png') no-repeat bottom right;
             background-size: 10%;
         }
-        
+
         .preview {
             width: 30%;
             margin: 0 auto;
@@ -58,11 +58,17 @@ if ($show_image) {
     <![endif]-->
     <?php if ($show_image) : ?>
         <meta property="og:title"
-              content="<?= isset($data['data-title']) ? urldecode($data['data-title']) : "Image @ Cuidas' Imageproxy"; ?>"/>
+              content="<?=
+              strlen($data['data-title']) ? urldecode(
+                  $data['data-title']
+              ) : "Image @ Cuidas' Imageproxy"; ?>"/>
         <meta property="og:type" content="website"/>
         <meta property="og:url" content="<?= 'http://' . $_SERVER[HTTP_HOST] . $_SERVER[REQUEST_URI]; ?>"/>
         <meta property="og:description"
-              content="<?= isset($data['data-descr']) ? urldecode($data['data-descr']) : "Someone sharewd an image @ Cuidas' Imageproxy"; ?>"/>
+              content="<?=
+              strlen($data['data-descr']) ? urldecode(
+                  $data['data-descr']
+              ) : "Someone shared an image @ Cuidas' Imageproxy"; ?>"/>
         <meta property="og:image" content="<?= urldecode($data['data-url']); ?>"/>
     <?php else : ?>
         <meta property="og:title" content="Cuidas' Imageproxy"/>
@@ -94,29 +100,47 @@ if ($show_image) {
 </div>
 <div class="container">
     <div class="starter-template">
+        <div class="error-msg"></div>
         <?php if ($show_image) : ?>
-            <h1><?= urldecode($data['data-title']); ?></h1>
-            <a data-footer="<?= urldecode($data['data-descr']); ?>" data-title="<?= urldecode($data['data-title']); ?>" data-toggle="lightbox" href="image.php?url=<?= $data['data-url']; ?>">
-                <img class="preview img-responsive" src="image.php?url=<?= $data['data-url']; ?>">
+            <h1><?= strlen($data['data-title']) ? urldecode($data['data-title']) : "Image @ Cuidas' Imageproxy"; ?></h1>
+            <a data-footer="<?=
+            strlen($data['data-descr']) ? urldecode(
+                $data['data-descr']
+            ) : "Someone shared an image @ Cuidas' Imageproxy"; ?>"
+               data-title="<?=
+               strlen($data['data-title']) ? urldecode(
+                   $data['data-title']
+               ) : "Image @ Cuidas' Imageproxy"; ?>" data-toggle="lightbox"
+               href="image.php?url=<?= $data['data-url']; ?>">
+            <img class="preview img-responsive" src="image.php?url=<?= $data['data-url']; ?>">
             </a>
             <p class="lead">
-                <?= urldecode($data['data-descr']); ?>
+                <?=
+                strlen($data['data-descr']) ? urldecode(
+                    $data['data-descr']
+                ) : "Someone sharewd an image @ Cuidas' Imageproxy"; ?>
             </p>
         <?php else : ?>
             <h1>Cuidas' Imageproxy</h1>
             <form class="form-horizontal span8" id="data-form">
-                <label for="data-url">
-                    URL
-                </label>
-                <input type="text" id="data-url" name="data-url"/>
-                <label for="data-title">
-                    Title
-                </label>
-                <input type="text" id="data-title" name="data-title"/><br/>
-                <label for="data-descr">
-                    Description
-                </label>
-                <textarea id="data-descr" name="data-descr"></textarea>
+                <div class="form-group url">
+                    <label class="control-label" for="data-url">
+                        URL
+                    </label>
+                    <input type="text" class="form-control" id="data-url" name="data-url"/>
+                </div>
+                <div class="form-group title">
+                    <label class="control-label" for="data-title">
+                        Title
+                    </label>
+                    <input type="text" class="form-control" id="data-title" name="data-title"/>
+                </div>
+                <div class="form-group descr">
+                    <label class="control-label" for="data-descr">
+                        Description
+                    </label>
+                    <textarea class="form-control" id="data-descr" name="data-descr"/></textarea>
+                </div>
                 <input type="submit" value="Submit" id="submit-button"/>
             </form>
             <p class="lead">Simple and clean image sharing on social networks. Enter the image-url, a title, a
