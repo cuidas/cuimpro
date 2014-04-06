@@ -5,7 +5,7 @@ if( !ini_get('allow_url_fopen') ) {
 } 
 
 /* Attempt to open */
-$imgname = ('http://commons.wikimedia.org/wiki/File:Facebook_like_thumb.png');
+$imgname = ('http://upload.wikimedia.org/wikipedia/commons/1/13/Facebook_like_thumb.png');
 $im = imagecreatefrompng($imgname);
 
 
