@@ -26,6 +26,15 @@ if( !ini_get('allow_url_fopen') ) {
 
 
     <script src="index.js"></script>
+<style type="text/css">
+    body {
+      padding-top: 50px;
+    }
+    .starter-template {
+      padding: 40px 15px;
+      text-align: center;
+    }
+</style>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -47,8 +56,13 @@ if( !ini_get('allow_url_fopen') ) {
     <meta property="og:image:height" content="300" />           
   </head>
   <body>
-    <h1>Hello, world!</h1>
-    <img src="./Image.php?<?=urlencode('http://upload.wikimedia.org/wikipedia/commons/1/13/Facebook_like_thumb.png')?>" />
+    <? if ($show_image) : ?>
+      <h1>Hello, world!</h1>
+      <img src="./Image.php?url=<?=urlencode('http://upload.wikimedia.org/wikipedia/commons/1/13/Facebook_like_thumb.png')?>" />
+    <? else : ?>
+      <input type="text" id="url" name="url" />
+      <input type="submit" name="submit" id="submit" />
+    <? endif; ?>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
