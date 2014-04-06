@@ -33,5 +33,5 @@ Relase Notes
 
 0.0.1alpha:
 
-* From now on we are in 0.0.1 alpha stage, maybe a negative Version would be more appropiate, because there is noc code in it yet... :)
+* From now on we are in 0.0.1 alpha stage, maybe a negative Version would be more appropiate, because there is no code in it yet... :)
 
