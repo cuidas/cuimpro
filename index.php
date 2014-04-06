@@ -32,7 +32,6 @@ if ($show_image) {
     <!-- Optional theme -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
 
-
     <style type="text/css">
         body {
             padding-top: 50px;
@@ -44,6 +43,12 @@ if ($show_image) {
             background: url('http://upload.wikimedia.org/wikipedia/commons/1/13/Facebook_like_thumb.png') no-repeat bottom right;
             background-size: 10%;
         }
+        
+        .preview {
+            width: 30%;
+            margin: 0 auto;
+        }
+
     </style>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -53,17 +58,17 @@ if ($show_image) {
     <![endif]-->
     <?php if ($show_image) : ?>
         <meta property="og:title"
-              content="<?= isset($data['data-title']) ? $data['data-title'] : "Image @ Cuidas' Imageproxy"; ?>"/>
+              content="<?= isset($data['data-title']) ? urldecode($data['data-title']) : "Image @ Cuidas' Imageproxy"; ?>"/>
         <meta property="og:type" content="website"/>
-        <meta property="og:url" content="<?= $_SERVER['REQUEST_URI']; ?>"/>
+        <meta property="og:url" content="<?= 'http://' . $_SERVER[HTTP_HOST] . $_SERVER[REQUEST_URI]; ?>"/>
         <meta property="og:description"
-              content="<?= isset($data['data-title']) ? $data['data-title'] : "Someone sharewd an image @ Cuidas' Imageproxy"; ?>"/>
-        <meta property="og:image" content="<?= $data['data-url']; ?>"/>
+              content="<?= isset($data['data-descr']) ? urldecode($data['data-descr']) : "Someone sharewd an image @ Cuidas' Imageproxy"; ?>"/>
+        <meta property="og:image" content="<?= urldecode($data['data-url']); ?>"/>
     <?php else : ?>
         <meta property="og:title" content="Cuidas' Imageproxy"/>
         <meta property="og:type" content="website"/>
-        <meta property="og:url" content="<?= $_SERVER['REQUEST_URI']; ?>"/>
-        <meta property="og:image" content="http://commons.wikimedia.org/wiki/File%3AFacebook_like_thumb.png"/>
+        <meta property="og:url" content="<?= 'http://' . $_SERVER[HTTP_HOST] . $_SERVER[REQUEST_URI]; ?>"/>
+        <meta property="og:image" content="http://upload.wikimedia.org/wikipedia/commons/1/13/Facebook_like_thumb.png"/>
         <meta property="og:description" content="Sharing images made easy!"/>
     <?php endif; ?>
 </head>
@@ -77,11 +82,11 @@ if ($show_image) {
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Project name</a>
+            <a class="navbar-brand" href="#">Cuidas' Imageproxy</a>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="./index.php">Start</a></li>
+                <li><a href="./index.php">Start over</a></li>
                 <li><a href="https://github.com/cuidas/cuimpro" target="_blank">cuimpro on github</a></li>
             </ul>
         </div>
@@ -90,9 +95,13 @@ if ($show_image) {
 <div class="container">
     <div class="starter-template">
         <?php if ($show_image) : ?>
-            <h1><?= $data['data-title']; ?></h1>
-            <img src="image.php?url=<?= $data['data-url']; ?>"/>
-            <p class="lead"><?= $data['data-descr']; ?></p>
+            <h1><?= urldecode($data['data-title']); ?></h1>
+            <a data-footer="<?= urldecode($data['data-descr']); ?>" data-title="<?= urldecode($data['data-title']); ?>" data-toggle="lightbox" href="image.php?url=<?= $data['data-url']; ?>">
+                <img class="preview img-responsive" src="image.php?url=<?= $data['data-url']; ?>">
+            </a>
+            <p class="lead">
+                <?= urldecode($data['data-descr']); ?>
+            </p>
         <?php else : ?>
             <h1>Cuidas' Imageproxy</h1>
             <form class="form-horizontal span8" id="data-form">
@@ -117,9 +126,12 @@ if ($show_image) {
 </div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js"></script>
+
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <!-- Latest compiled and minified JavaScript -->
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/ekko-lightbox/3.0.2b/ekko-lightbox.min.js"></script>
 <script src="index.js"></script>
 </body>
 </html>
