@@ -4,6 +4,13 @@ if( !ini_get('allow_url_fopen') ) {
    phpinfo();
    die();
 } 
+$raw_data = base64_decode($_GET['data']);
+$data = array();
+foreach (explode('&', $raw_data) as $data_item) {
+    $exploded = explode('=', $data_item);
+    $data[$exploded[0]] = $exploded[1];
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -21,11 +28,7 @@ if( !ini_get('allow_url_fopen') ) {
     <!-- Optional theme -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
     
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-
-
-    <script src="index.js"></script>
+    
 <style type="text/css">
     body {
       padding-top: 50px;
@@ -56,16 +59,54 @@ if( !ini_get('allow_url_fopen') ) {
     <meta property="og:image:height" content="300" />           
   </head>
   <body>
-    <? if ($show_image) : ?>
-      <h1>Hello, world!</h1>
-      <img src="./Image.php?url=<?=urlencode('http://upload.wikimedia.org/wikipedia/commons/1/13/Facebook_like_thumb.png')?>" />
-    <? else : ?>
-      <input type="text" id="url" name="url" />
-      <input type="submit" name="submit" id="submit" />
-    <? endif; ?>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Project name</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="./index.php">Start</a></li>
+            <li><a href="https://github.com/cuidas/cuimpro">cuimpro on github</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+<div class="container">
+
+      <div class="starter-template">
+          <? if ($show_image) : ?>
+          <h1><?=$data['data-title'];?></h1>
+          <img src="./Image.php?url=<?=$data['data-url'];?>" />
+          <p class="lead"><?=$data['data-descr'];?></p>
+        <? else : ?>
+          <h1>Hello, world!</h1>
+          <form id="data-form">
+            <label for="data-url">URL<input type="text" id="data-url" name="data-url" /><br />
+            <label for="data-url">Title<input type="text" id="data-title" name="data-title" /><br />
+            <label for="data-url">Description<input type="text" id="data-descr" name="data-descr" /><br />
+            <input type="submit" value="Submit" id="submit-button" /><br />
+          </form>
+          <p class="lead"></p>
+        <? endif; ?>
+
+        
+        
+      </div>
+
+    </div>
+
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="index.js"></script>
   </body>
 </html>
