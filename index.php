@@ -1,7 +1,13 @@
 <?
+if( !ini_get('allow_url_fopen') ) {
+   phpinfo();
+   die();
+} 
+
 /* Attempt to open */
 $imgname = ('http://commons.wikimedia.org/wiki/File:Facebook_like_thumb.png');
 $im = imagecreatefrompng($imgname);
+
 
 /* See if it failed */
 if(!$im)
