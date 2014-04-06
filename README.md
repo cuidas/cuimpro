@@ -35,3 +35,7 @@ Relase Notes
 
 * From now on we are in 0.0.1 alpha stage, maybe a negative Version would be more appropiate, because there is no code in it yet... :)
 
+0.1.0beta:
+
+* Seems to work now, but only with PNG-Images
+
