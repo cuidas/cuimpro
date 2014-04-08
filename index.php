@@ -118,7 +118,7 @@ if ($show_image) {
                 <?=
                 strlen($data['data-descr']) ? urldecode(
                     $data['data-descr']
-                ) : "Someone sharewd an image @ Cuidas' Imageproxy"; ?>
+                ) : "Someone shared an image @ Cuidas' Imageproxy"; ?>
             </p>
         <?php else : ?>
             <h1>Cuidas' Imageproxy</h1>
