@@ -63,7 +63,7 @@ if ($show_image) {
                   $data['data-title']
               ) : "Image @ Cuidas' Imageproxy"; ?>"/>
         <meta property="og:type" content="website"/>
-        <meta property="og:url" content="<?= 'http://' . $_SERVER[HTTP_HOST] . $_SERVER[REQUEST_URI]; ?>"/>
+        <meta property="og:url" content="<?= 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; ?>"/>
         <meta property="og:description"
               content="<?=
               strlen($data['data-descr']) ? urldecode(
@@ -73,7 +73,7 @@ if ($show_image) {
     <?php else : ?>
         <meta property="og:title" content="Cuidas' Imageproxy"/>
         <meta property="og:type" content="website"/>
-        <meta property="og:url" content="<?= 'http://' . $_SERVER[HTTP_HOST] . $_SERVER[REQUEST_URI]; ?>"/>
+        <meta property="og:url" content="<?= 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; ?>"/>
         <meta property="og:image" content="http://upload.wikimedia.org/wikipedia/commons/1/13/Facebook_like_thumb.png"/>
         <meta property="og:description" content="Sharing images made easy!"/>
     <?php endif; ?>
@@ -111,8 +111,8 @@ if ($show_image) {
                strlen($data['data-title']) ? urldecode(
                    $data['data-title']
                ) : "Image @ Cuidas' Imageproxy"; ?>" data-toggle="lightbox"
-               href="image.php?url=<?= $data['data-url']; ?>">
-            <img class="preview img-responsive" src="image.php?url=<?= $data['data-url']; ?>">
+               href="<?= $data['data-url']; ?>">
+                <img class="preview img-responsive" src="<?= $data['data-url']; ?>">
             </a>
             <p class="lead">
                 <?=
@@ -139,7 +139,7 @@ if ($show_image) {
                     <label class="control-label" for="data-descr">
                         Description
                     </label>
-                    <textarea class="form-control" id="data-descr" name="data-descr"/></textarea>
+                    <textarea class="form-control" id="data-descr" name="data-descr"></textarea>
                 </div>
                 <input type="submit" value="Submit" id="submit-button"/>
             </form>
