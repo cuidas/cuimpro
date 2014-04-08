@@ -111,8 +111,8 @@ if ($show_image) {
                strlen($data['data-title']) ? urldecode(
                    $data['data-title']
                ) : "Image @ Cuidas' Imageproxy"; ?>" data-toggle="lightbox"
-               href="<?= $data['data-url']; ?>">
-                <img class="preview img-responsive" src="<?= $data['data-url']; ?>">
+               href="<?= urldecode($data['data-url']); ?>">
+                <img class="preview img-responsive" src="<?= urldecode($data['data-url']); ?>">
             </a>
             <p class="lead">
                 <?=
